@@ -11,6 +11,7 @@ public class RequisicaoInstaloader {
     private Menu menu;
     private EnviaInstaloader enviaInstaloader;
     private Data data;
+    private String nomeDir;
 
     public void definindoRequisicaoInstaloader() {
 
@@ -28,20 +29,22 @@ public class RequisicaoInstaloader {
             op = menu.definindoFiltros(getPerfil(), getHashtag(), getData());
         }while(op != 4);
 
-        if(localizacao.getEstado() != null){
+        if(localizacao.getEstado() != null && localizacao.getCidade() != null){
 
-            requisicaoInstaloader = "instaloader --geotags --login=" + menu.getPerfilEntrada();
+            requisicaoInstaloader = "instaloader -V --geotags --login=" + menu.getPerfilEntrada();
 
             if(perfil.getNome() != null){
                 requisicaoInstaloader = requisicaoInstaloader +" "
                                         + perfil.getNome();
+                nomeDir = perfil.getNome();
             }
             else if(hashtag.getTag() != null){
-                requisicaoInstaloader = "instaloader"
+                requisicaoInstaloader = "instaloader -V"
                                         + " \"" + hashtag.getTag()+ "\"" ;
+                nomeDir = hashtag.getTag();
             }
 
-            if (data.getDia() != null){
+            if (data.getDia() != null && data.getMes() != null && data.getAno() != null){
                 requisicaoInstaloader = requisicaoInstaloader
                                         + " --post-filter=\"date_utc";
                  if(data.getOperador() == 1){ //a partir de / depois de
@@ -58,11 +61,15 @@ public class RequisicaoInstaloader {
                                         + data.getAno() +"," + data.getMes()+ ","+ data.getDia() + ")\"";
             }
 
+            System.out.println(requisicaoInstaloader);
+
+            enviaInstaloader.criaDir(nomeDir);
+            enviaInstaloader.enviaCMD(requisicaoInstaloader, nomeDir);
         }
-
-        System.out.println(requisicaoInstaloader);
-
-        enviaInstaloader.enviaCMD(requisicaoInstaloader);
+        else
+        {
+            System.out.println("Operação invalida!");
+        }
 
     }
 
