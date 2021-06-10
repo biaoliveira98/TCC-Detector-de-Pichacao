@@ -1,9 +1,6 @@
 package requisicao;
 
-import entidades.Hashtag;
-import entidades.Localizacao;
-import entidades.Menu;
-import entidades.Perfil;
+import entidades.*;
 
 public class RequisicaoInstaloader {
 
@@ -13,6 +10,7 @@ public class RequisicaoInstaloader {
     private Hashtag hashtag;
     private Menu menu;
     private EnviaInstaloader enviaInstaloader;
+    private Data data;
 
     public void definindoRequisicaoInstaloader() {
 
@@ -21,13 +19,14 @@ public class RequisicaoInstaloader {
         setHashtag(new Hashtag());
         setMenu(new Menu());
         setEnviaInstaloader(new EnviaInstaloader());
+        setData(new Data());
         Integer op;
 
         menu.menuIncial(getLocalizacao());
 
         do{
-            op = menu.definindoFiltros(getPerfil(), getHashtag());
-        }while(op != 3);
+            op = menu.definindoFiltros(getPerfil(), getHashtag(), getData());
+        }while(op != 4);
 
         if(localizacao.getEstado() != null){
 
@@ -38,8 +37,25 @@ public class RequisicaoInstaloader {
                                         + perfil.getNome();
             }
             else if(hashtag.getTag() != null){
-                requisicaoInstaloader = requisicaoInstaloader
+                requisicaoInstaloader = "instaloader"
                                         + " \"" + hashtag.getTag()+ "\"" ;
+            }
+
+            if (data.getDia() != null){
+                requisicaoInstaloader = requisicaoInstaloader
+                                        + " --post-filter=\"date_utc";
+                 if(data.getOperador() == 1){ //a partir de / depois de
+                     requisicaoInstaloader = requisicaoInstaloader + ">=";
+                 }else if(data.getOperador() == 2){ //antes de
+                     requisicaoInstaloader = requisicaoInstaloader + "<=";
+                 }else if(data.getOperador() == 3){ //referentes a
+                     requisicaoInstaloader = requisicaoInstaloader + "==";
+                 }else{
+                     System.out.println("Operação inválida");
+                 }
+                requisicaoInstaloader = requisicaoInstaloader +
+                                        "datetime(" +
+                                        + data.getAno() +"," + data.getMes()+ ","+ data.getDia() + ")\"";
             }
 
         }
@@ -93,6 +109,13 @@ public class RequisicaoInstaloader {
         this.menu = menu;
     }
 
+
+    public Data getData() {
+        return data;
+    }
+    public void setData(Data data) {
+        this.data = data;
+    }
 
     public EnviaInstaloader getEnviaInstaloader() {
         return enviaInstaloader;

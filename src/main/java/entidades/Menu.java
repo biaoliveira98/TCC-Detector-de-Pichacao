@@ -14,7 +14,8 @@ public class Menu {
         System.out.println();
         System.out.println("1- Entrar com um perfil específico");
         System.out.println("2- Entrar com uma hashtag");
-        System.out.println("3- Enviar a requisicao");
+        System.out.println("3- Definir data");
+        System.out.println("4- Enviar a requisicao");
         System.out.println("Opcao: ");
     }
 
@@ -36,7 +37,7 @@ public class Menu {
 
     public void menuPerfil(Perfil perfil){
 
-        System.out.println("entidades.Perfil");
+        System.out.println("Perfil");
         System.out.println("Nome perfil: (sem o @)");
         perfil.setNome(scr.nextLine());
         System.out.println("Esse perfil é privado? 1-Sim ou 2-Não");
@@ -47,18 +48,35 @@ public class Menu {
     }
 
     public void menuHashtag(Hashtag hashtag){
-        System.out.println("entidades.Hashtag");
+        System.out.println("Hashtag");
         System.out.println("Entre com a hashtag: (sem a #)");
         hashtag.setTag("#" + scr.nextLine());
     }
 
     public void definePerfilEntrada(String perfilEntrada){
-        System.out.println("entidades.Perfil entrada");
+        System.out.println("Perfil entrada");
         System.out.println("Entre com o nome do seu perfil: (sem a @)");
-        setPerfilEntrada("@" + scr.nextLine());
+        setPerfilEntrada(scr.nextLine());
     }
 
-    public Integer definindoFiltros(Perfil perfil, Hashtag hashtag){
+    public void menuData(Data data){
+        System.out.println("Data");
+        System.out.println("Você deseja:");
+        System.out.println("(1) Ver posts a partir desta data");
+        System.out.println("(2) Ver posts antes desta data");
+        System.out.println("(3) Ver posts referentes a esta data");
+        System.out.println("Opcao: ");
+        data.setOperador(scr.nextInt());
+        System.out.println("Entre com a data desejada  XX/XX/XXXX");
+        System.out.println("Dia: ");
+        data.setDia(scr.nextInt());
+        System.out.println("Mes: ");
+        data.setMes(scr.nextInt());
+        System.out.println("Ano: ");
+        data.setAno(scr.nextInt());
+        System.out.println("Data: " + data.getDia().toString() +"/"+ data.getMes().toString()+ "/" + data.getAno().toString());
+    }
+    public Integer definindoFiltros(Perfil perfil, Hashtag hashtag, Data data){
         printMenu();
         setOpcaoFiltro(scr.nextInt());
 
@@ -72,6 +90,9 @@ public class Menu {
                 menuHashtag(hashtag);
                 break;
             case 3:
+                menuData(data);
+                break;
+            case 4:
                 break;
             default:
                 System.out.println("Essa opção não existe, tente novamente...");
@@ -91,7 +112,6 @@ public class Menu {
     public String getPerfilEntrada() {
         return perfilEntrada;
     }
-
     public void setPerfilEntrada(String perfilEntrada) {
         this.perfilEntrada = perfilEntrada;
     }
