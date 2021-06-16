@@ -63,8 +63,10 @@ public class RequisicaoInstaloader {
 
             System.out.println(requisicaoInstaloader);
 
-            enviaInstaloader.criaDir(nomeDir);
-            enviaInstaloader.enviaCMD(requisicaoInstaloader, nomeDir);
+            enviaInstaloader.enviaCMD(2, requisicaoInstaloader, ("\\" +nomeDir + "\\imgs"));
+           // enviaInstaloader.enviaCMD(2, requisicaoInstaloader, ( "\\" +nomeDir + "\\imgs"));
+            enviaInstaloader.enviaCMD(1, requisicaoInstaloader, nomeDir);
+           // enviaInstaloader.enviaCMD(3, requisicaoInstaloader, (nomeDir + "\\imgs"));
         }
         else
         {
