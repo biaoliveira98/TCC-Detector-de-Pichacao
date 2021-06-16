@@ -1,8 +1,8 @@
 # Trabalho de Conclusão de Curso em Engenharia de Computação
 
-##Sistema de detecção de Pichações em Redes Sociais
+## Sistema de detecção de Pichações em Redes Sociais
 
-###Sobre:
+### Sobre:
 
 O sistema detecta quais posts da rede social Instagram possue pichação.
 O usuário ajusta alguns filtros para restringir a busca de fotos, dentre esses filtros estão:
@@ -12,7 +12,7 @@ O usuário ajusta alguns filtros para restringir a busca de fotos, dentre esses 
 * Busca por perfil (privado ou público);
 * Busca por hashtag.
 
-###Tecnologias utilizadas:
+### Tecnologias utilizadas:
 
 * API Google Maps;
 * Instaloader (programa desenvolvido em Python que auxilia na obtenção dos posts e suas informações);
