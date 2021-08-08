@@ -1,5 +1,6 @@
 package flask;
 
+import entidades.Post;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -17,22 +18,23 @@ import java.util.List;
 public class EnviaRequisicaoFlask {
 
     private List<File> imagens;
-    private List<String> predictsImagens;
 
-    public void predictImagem(String path) throws IOException {
+    public List<Post> predictImagem(String path) throws IOException {
 
+        List<Post> posts = new ArrayList<>();
         PreparaImagens preparaImagens = new PreparaImagens();
         setImagens(pegaImagens(path));
+
         if(getImagens() != null) {
             HttpPost request = new HttpPost("http://192.168.15.14:5000/predict");
             HttpResponse response;
             CloseableHttpClient httpClient = null;
-            List<String> responseList = new ArrayList<>();
+            String r;
             StringEntity params;
             JSONObject json;
             try {
                 for (File f : imagens) {
-
+                    Post post = new Post();
                     String encodstring = preparaImagens.encodeFileToBase64Binary(f);
 
                     json = new JSONObject();
@@ -46,21 +48,25 @@ public class EnviaRequisicaoFlask {
                     request.setEntity(params);
                     response = httpClient.execute(request);
                     System.out.println("Enviado com sucesso");
-                    responseList.add(new BasicResponseHandler().handleResponse(response));
+                    r = new BasicResponseHandler().handleResponse(response);
+                    post.setPath(f.toString());
+                    post.setTipo(r);
+                    posts.add(post);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             } finally {
                 httpClient.close();
             }
-
-            setPredictsImagens(responseList);
-            System.out.println(predictsImagens.toString());
+            //System.out.println(getPostsList().get(0).getPath() + " " + getPostsList().get(0).getTipo());
+            //System.out.println(getPostsList().get(1).getPath() + " " + getPostsList().get(1).getTipo());
         }
         else
         {
             System.out.println("Nenhuma imagem foi encontrada");
         }
+
+        return posts;
     }
 
     public List<File> pegaImagens(String path) {
@@ -90,15 +96,5 @@ public class EnviaRequisicaoFlask {
     public void setImagens(List<File> imagens) {
         this.imagens = imagens;
     }
-
-
-    public List<String> getPredictsImagens() {
-        return predictsImagens;
-    }
-
-    public void setPredictsImagens(List<String> predictsImagens) {
-        this.predictsImagens = predictsImagens;
-    }
-
 
 }
