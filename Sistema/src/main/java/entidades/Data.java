@@ -7,7 +7,6 @@ public class Data {
     private Integer ano;
     private Integer operador;
 
-
     public Integer getOperador() {
         return operador;
     }

@@ -1,4 +1,4 @@
-package requisicao;
+package instaloader;
 
 import entidades.*;
 
@@ -63,10 +63,7 @@ public class RequisicaoInstaloader {
 
             System.out.println(requisicaoInstaloader);
 
-            enviaInstaloader.enviaCMD(2, requisicaoInstaloader, ("\\" +nomeDir + "\\imgs"));
-           // enviaInstaloader.enviaCMD(2, requisicaoInstaloader, ( "\\" +nomeDir + "\\imgs"));
-            enviaInstaloader.enviaCMD(1, requisicaoInstaloader, nomeDir);
-           // enviaInstaloader.enviaCMD(3, requisicaoInstaloader, (nomeDir + "\\imgs"));
+            enviaInstaloader.enviaCMD(requisicaoInstaloader, ("\\" +nomeDir + "\\imgs"));
         }
         else
         {
@@ -75,7 +72,7 @@ public class RequisicaoInstaloader {
 
     }
 
-
+//TODO Validações: data, valores
 
 //Getters and setters
 
@@ -124,6 +121,14 @@ public class RequisicaoInstaloader {
     }
     public void setData(Data data) {
         this.data = data;
+    }
+
+    public String getNomeDir() {
+        return nomeDir;
+    }
+
+    public void setNomeDir(String nomeDir) {
+        this.nomeDir = nomeDir;
     }
 
     public EnviaInstaloader getEnviaInstaloader() {
