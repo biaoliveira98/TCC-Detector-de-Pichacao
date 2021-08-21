@@ -9,18 +9,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.FilenameUtils;
 
 public class Descricao {
 
     public void defineDescricao(List<Post> posts, String path) throws IOException {
 
-        List<File> arquivos = new ArrayList<File>();
-
+        List<File> arquivos;
         arquivos = pegaArquivosDescricao(path);
+        String fSemExt, postSemExt;
 
         for (Post post : posts) {
             for (File f: arquivos) {
-                if(post.getPath() == f.getAbsolutePath()){
+                fSemExt = FilenameUtils.removeExtension(f.getName());
+                System.out.println(fSemExt);
+                postSemExt = FilenameUtils.removeExtension(post.getPath());
+                System.out.println(postSemExt);
+                if(postSemExt.equals(fSemExt)){
                     Path pathArqF = Paths.get(f.getAbsolutePath());
                     List<String> linhasArquivo = Files.readAllLines(pathArqF);
                     for (String linha : linhasArquivo) {

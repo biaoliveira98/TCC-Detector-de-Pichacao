@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class Menu {
 
     private Integer opcaoFiltro;
-    private String perfilEntrada;
-    private Scanner scr = new Scanner(System.in);;
+    private Scanner scr = new Scanner(System.in);
 
     public void printMenu() {
 
@@ -19,9 +18,9 @@ public class Menu {
         System.out.println("Opcao: ");
     }
 
-    public void menuIncial(Localizacao localizacao) {
+    public void menuIncial(Localizacao localizacao, Usuario usuario) {
         menuLocalizacao(localizacao);
-        definePerfilEntrada(perfilEntrada);
+        definePerfilEntrada(usuario);
     }
 
     public void menuLocalizacao(Localizacao localizacao){
@@ -53,10 +52,12 @@ public class Menu {
         hashtag.setTag("#" + scr.nextLine());
     }
 
-    public void definePerfilEntrada(String perfilEntrada){
+    public void definePerfilEntrada(Usuario perfilEntrada){
         System.out.println("Perfil entrada");
         System.out.println("Entre com o nome do seu perfil: (sem a @)");
-        setPerfilEntrada(scr.nextLine());
+        perfilEntrada.setNomePerfil(scr.nextLine());
+        System.out.println("Senha: ");
+        perfilEntrada.setSenha(scr.nextLine());
     }
 
     public void menuData(Data data){
@@ -92,7 +93,7 @@ public class Menu {
             case 3:
                 menuData(data);
                 break;
-            case 4:
+            case 4:  //envia requisicao
                 break;
             default:
                 System.out.println("Essa opção não existe, tente novamente...");
@@ -107,13 +108,6 @@ public class Menu {
     }
     public void setOpcaoFiltro(Integer opcaoFiltro) {
         this.opcaoFiltro = opcaoFiltro;
-    }
-
-    public String getPerfilEntrada() {
-        return perfilEntrada;
-    }
-    public void setPerfilEntrada(String perfilEntrada) {
-        this.perfilEntrada = perfilEntrada;
     }
 
 
