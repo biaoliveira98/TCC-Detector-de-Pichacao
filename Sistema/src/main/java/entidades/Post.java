@@ -12,6 +12,9 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" +
+                "path='" + path + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", descricao='" + descricao + '\'' +
                 ", localizacao=" + localizacao +
                 '}';
     }
