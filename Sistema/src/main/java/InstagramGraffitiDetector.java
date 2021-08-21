@@ -29,6 +29,8 @@ public class InstagramGraffitiDetector {
                 System.out.println("Não há posts");
             else{
                 descricao.defineDescricao(postList,path);
+
+                System.out.println(postList.toString());
             }
 
             System.out.println("Deseja fazer outra requisição: 1-Sim ou 2-Nao");

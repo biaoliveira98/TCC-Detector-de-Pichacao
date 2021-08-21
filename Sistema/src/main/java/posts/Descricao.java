@@ -1,5 +1,6 @@
 package posts;
 
+import entidades.Localizacao;
 import entidades.Post;
 
 import java.io.File;
@@ -17,7 +18,8 @@ public class Descricao {
 
         List<File> arquivos;
         arquivos = pegaArquivosDescricao(path);
-        String fSemExt, postSemExt;
+        String fSemExt, postSemExt, postLocal, fLocal;
+
 
         for (Post post : posts) {
             for (File f: arquivos) {
@@ -25,11 +27,23 @@ public class Descricao {
                 System.out.println(fSemExt);
                 postSemExt = FilenameUtils.removeExtension(post.getPath());
                 System.out.println(postSemExt);
-                if(postSemExt.equals(fSemExt)){
-                    Path pathArqF = Paths.get(f.getAbsolutePath());
-                    List<String> linhasArquivo = Files.readAllLines(pathArqF);
-                    for (String linha : linhasArquivo) {
-                        post.setDescricao(post.getDescricao() + linha);
+                if((fSemExt.contains("location")) == false) {
+                    if (postSemExt.equals(fSemExt)) {
+                        Path pathArqF = Paths.get(f.getAbsolutePath());
+                        List<String> linhasArquivo = Files.readAllLines(pathArqF);
+                        for (String linha : linhasArquivo) {
+                            post.setDescricao(post.getDescricao() + linha);
+                        }
+                    }
+                }
+                else{
+                    postLocal = postSemExt + "_location";
+                    if (postLocal.equals(fSemExt)) {
+                        Path pathArqF = Paths.get(f.getAbsolutePath());
+                        List<String> linhasArquivo = Files.readAllLines(pathArqF);
+                        post.setLocalizacao(new LocalizacaoPost());
+                        post.getLocalizacao().setLocal(linhasArquivo.get(0));
+                        post.getLocalizacao().setUrlMaps(linhasArquivo.get(1));
                     }
                 }
             }

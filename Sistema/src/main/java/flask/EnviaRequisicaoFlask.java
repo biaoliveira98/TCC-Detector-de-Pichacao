@@ -4,7 +4,6 @@ import entidades.Post;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
@@ -12,7 +11,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 
-import java.awt.desktop.OpenURIEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class EnviaRequisicaoFlask {
         setImagens(pegaImagens(path));
 
         if(getImagens() != null) {
-            HttpPost request = new HttpPost("http://192.168.15.6:5000/predict");
+            HttpPost request = new HttpPost("http://192.168.15.11:5000/predict");
             HttpResponse response;
             HttpHost target = new HttpHost(request.getURI().getHost(), 5000, "https");
             CloseableHttpClient httpClient = null;
@@ -68,8 +66,7 @@ public class EnviaRequisicaoFlask {
             } finally {
                 httpClient.close();
             }
-            //System.out.println(getPostsList().get(0).getPath() + " " + getPostsList().get(0).getTipo());
-            //System.out.println(getPostsList().get(1).getPath() + " " + getPostsList().get(1).getTipo());
+
         }
         else
         {

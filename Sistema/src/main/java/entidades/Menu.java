@@ -25,13 +25,10 @@ public class Menu {
 
     public void menuLocalizacao(Localizacao localizacao){
         System.out.println("Localização");
-        System.out.println("Escolha um estado: (ex: SP, MG, RJ ...)");
-        localizacao.setEstado(scr.nextLine());
-        System.out.println("Escolha uma cidade: (ex: São Paulo, Campinas ...)");
-        localizacao.setCidade(scr.nextLine());
+        System.out.println("Entre com uma localização: (Exemplo: Campinas, Sao Paulo)");
+        localizacao.setLocal(scr.nextLine());
         System.out.println("Localização setada para : "
-                + localizacao.getCidade() + ","
-                + localizacao.getEstado());
+                + localizacao.getLocal());
     }
 
     public void menuPerfil(Perfil perfil){

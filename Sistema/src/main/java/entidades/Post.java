@@ -1,13 +1,20 @@
 package entidades;
 
+import posts.LocalizacaoPost;
+
 public class Post {
 
     private String path;
     private String tipo;
     private String descricao;
-    private String localizacao;
+    private LocalizacaoPost localizacao;
 
-
+    @Override
+    public String toString() {
+        return "Post{" +
+                ", localizacao=" + localizacao +
+                '}';
+    }
 
     public String getPath() {
         return path;
@@ -36,12 +43,11 @@ public class Post {
     }
 
 
-    public String getLocalizacao() {
+    public LocalizacaoPost getLocalizacao() {
         return localizacao;
     }
 
-    public void setLocalizacao(String localizacao) {
+    public void setLocalizacao(LocalizacaoPost localizacao) {
         this.localizacao = localizacao;
     }
-
 }

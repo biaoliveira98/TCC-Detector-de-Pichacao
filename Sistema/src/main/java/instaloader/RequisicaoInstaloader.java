@@ -1,6 +1,7 @@
 package instaloader;
 
 import entidades.*;
+import entidades.Localizacao;
 
 public class RequisicaoInstaloader {
 
@@ -37,7 +38,7 @@ public class RequisicaoInstaloader {
             op = menu.definindoFiltros(getPerfil(), getHashtag(), getData());
         } while (op != 4);
 
-        if (localizacao.getEstado() != null && localizacao.getCidade() != null && usuario.getNomePerfil() != null && usuario.getSenha() != null) {
+        if (localizacao.getLocal() != null && usuario.getNomePerfil() != null && usuario.getSenha() != null) {
 
             requisicaoInstaloader = "instaloader -V --geotags --login=" + usuario.getNomePerfil();
 

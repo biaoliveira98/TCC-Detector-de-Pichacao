@@ -2,23 +2,21 @@ package entidades;
 
 public class Localizacao {
 
-    private String estado;
-    private String cidade;
+    private String local;
 
-    public String getCidade() {
-        return cidade;
+    @Override
+    public String toString() {
+        return "Localizacao{" +
+                "local='" + local + '\'' +
+                '}';
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public String getLocal() {
+        return local;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setLocal(String local) {
+        this.local = local;
     }
 
 
