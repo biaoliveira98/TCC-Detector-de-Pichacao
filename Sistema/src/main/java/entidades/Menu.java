@@ -36,11 +36,6 @@ public class Menu {
         System.out.println("Perfil");
         System.out.println("Nome perfil: (sem o @)");
         perfil.setNome(scr.nextLine());
-        System.out.println("Esse perfil é privado? 1-Sim ou 2-Não");
-        if(scr.nextInt() == 1)
-            perfil.setPrivado(Boolean.TRUE);
-        else
-            perfil.setPrivado(Boolean.FALSE);
     }
 
     public void menuHashtag(Hashtag hashtag){

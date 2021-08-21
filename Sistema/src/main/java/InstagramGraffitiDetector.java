@@ -33,9 +33,11 @@ public class InstagramGraffitiDetector {
                 descricao.defineDescricao(postList,path);
 
                 postList = filtragemPosts(postList);
-                System.out.println(postList.toString());
-
-
+                if(postList.isEmpty())
+                    System.out.println("Não há posts que satisfazem as condicoes");
+                else{
+                    System.out.println(postList.toString());
+                }
             }
 
             System.out.println("Deseja fazer outra requisição: 1-Sim ou 2-Nao");
