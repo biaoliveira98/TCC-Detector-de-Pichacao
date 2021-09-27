@@ -8,6 +8,7 @@ public class Post {
     private String tipo;
     private String descricao;
     private LocalizacaoPost localizacao;
+    private Double porcentagemSimilaridade;
 
     @Override
     public String toString() {
@@ -52,5 +53,13 @@ public class Post {
 
     public void setLocalizacao(LocalizacaoPost localizacao) {
         this.localizacao = localizacao;
+    }
+
+    public Double getPorcentagemSimilaridade() {
+        return porcentagemSimilaridade;
+    }
+
+    public void setPorcentagemSimilaridade(Double porcentagemSimilaridade) {
+        this.porcentagemSimilaridade = porcentagemSimilaridade;
     }
 }

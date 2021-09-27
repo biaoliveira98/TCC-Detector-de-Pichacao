@@ -28,7 +28,7 @@ public class EnviaRequisicaoFlask {
         setImagens(pegaImagens(path));
 
         if(getImagens() != null) {
-            HttpPost request = new HttpPost("http://192.168.15.11:5000/predict");
+            HttpPost request = new HttpPost("http://192.168.15.13:5000/predict");
             HttpResponse response;
             HttpHost target = new HttpHost(request.getURI().getHost(), 5000, "https");
             CloseableHttpClient httpClient = null;
@@ -94,6 +94,58 @@ public class EnviaRequisicaoFlask {
         return arquivos;
     }
 
+
+    public String predictSiamese(String path) throws IOException {
+
+        PreparaImagens preparaImagens = new PreparaImagens();
+        File imagem_usuario = new File(path);
+        String porcentagens = "Empty";
+
+        if(getImagens() != null) {
+            HttpPost request = new HttpPost("http://192.168.15.13:5000/predict/siamese_model");
+            HttpResponse response;
+            HttpHost target = new HttpHost(request.getURI().getHost(), 5000, "https");
+            CloseableHttpClient httpClient = null;
+            int timeout=30;
+            RequestConfig config = RequestConfig.custom()
+                    .setConnectTimeout( timeout * 1000)
+                    .setConnectionRequestTimeout(timeout * 1000)
+                    .setSocketTimeout(timeout * 1000).build();
+            String r;
+            StringEntity params;
+            JSONObject json;
+            try {
+                    String encodstring = preparaImagens.encodeFileToBase64Binary(imagem_usuario);
+
+                    json = new JSONObject();
+                    json.put("data", encodstring);
+                    json.put("type", "image");
+
+                    httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config).disableContentCompression().build();
+
+                    params = new StringEntity(json.toString());
+                    request.addHeader("content-type", "application/json");
+                    request.setEntity(params);
+                    response = httpClient.execute(request);
+                    //enviando de forma errada ainda - codigo 500 - erro no body request!
+                    System.out.println("Enviado com sucesso");
+                    r = new BasicResponseHandler().handleResponse(response);
+                    porcentagens = r.toString();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                httpClient.close();
+            }
+
+        }
+        else
+        {
+            System.out.println("Nenhuma imagem foi encontrada");
+        }
+
+        return porcentagens;
+    }
 
 
     public List<File> getImagens() {
