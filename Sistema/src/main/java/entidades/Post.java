@@ -17,6 +17,7 @@ public class Post {
                 ", tipo='" + tipo + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", localizacao=" + localizacao +
+                ", porcentagemSimilaridade=" + porcentagemSimilaridade +
                 '}';
     }
 

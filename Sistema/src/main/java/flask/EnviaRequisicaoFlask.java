@@ -28,7 +28,7 @@ public class EnviaRequisicaoFlask {
         setImagens(pegaImagens(path));
 
         if(getImagens() != null) {
-            HttpPost request = new HttpPost("http://192.168.15.13:5000/predict");
+            HttpPost request = new HttpPost("http://192.168.15.9:5000/predict");
             HttpResponse response;
             HttpHost target = new HttpHost(request.getURI().getHost(), 5000, "https");
             CloseableHttpClient httpClient = null;
@@ -101,8 +101,8 @@ public class EnviaRequisicaoFlask {
         File imagem_usuario = new File(path);
         String porcentagens = "Empty";
 
-        if(getImagens() != null) {
-            HttpPost request = new HttpPost("http://192.168.15.13:5000/predict/siamese_model");
+        if(imagem_usuario.exists()) {
+            HttpPost request = new HttpPost("http://192.168.15.9:5000/predict/siamese_model");
             HttpResponse response;
             HttpHost target = new HttpHost(request.getURI().getHost(), 5000, "https");
             CloseableHttpClient httpClient = null;
@@ -127,7 +127,7 @@ public class EnviaRequisicaoFlask {
                     request.addHeader("content-type", "application/json");
                     request.setEntity(params);
                     response = httpClient.execute(request);
-                    //enviando de forma errada ainda - codigo 500 - erro no body request!
+                    //enviando de forma correta - erro interno no servidor flask
                     System.out.println("Enviado com sucesso");
                     r = new BasicResponseHandler().handleResponse(response);
                     porcentagens = r.toString();
